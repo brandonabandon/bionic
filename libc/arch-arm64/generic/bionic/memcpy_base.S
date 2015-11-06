@@ -99,8 +99,6 @@
 	add	dstend, dstin, count
         cmp     count, 16
         b.ls    L(copy16)
-        cmp count, 65536
-        b.ge L(copy_huge)
 	cmp	count, 96
 	b.hi	L(copy_long)
 
