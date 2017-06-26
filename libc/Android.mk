@@ -1174,7 +1174,7 @@ include $(BUILD_STATIC_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE := libc_ndk
-LOCAL_CLANG := $(use_clang)
+LOCAL_CLANG := false
 LOCAL_ASFLAGS := $(LOCAL_CFLAGS)
 LOCAL_CONLYFLAGS := $(libc_common_conlyflags)
 LOCAL_CFLAGS := $(libc_common_cflags) -fvisibility=hidden -O0
@@ -1390,10 +1390,6 @@ LOCAL_ADDITIONAL_DEPENDENCIES := \
     $(LOCAL_PATH)/libc.arm.brillo.map \
     $(LOCAL_PATH)/libc.mips.brillo.map \
     $(LOCAL_PATH)/libc.x86.brillo.map \
-
-# Leave the symbols in the shared library so that stack unwinders can produce
-# meaningful name resolution.
-LOCAL_STRIP_MODULE := keep_symbols
 
 # Do not pack libc.so relocations; see http://b/20645321 for details.
 LOCAL_PACK_MODULE_RELOCATIONS := false

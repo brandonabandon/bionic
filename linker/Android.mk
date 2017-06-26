@@ -54,6 +54,14 @@ ifeq ($(TARGET_IS_64_BIT),true)
 LOCAL_CPPFLAGS += -DTARGET_IS_64_BIT
 endif
 
+ifeq ($(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS),true)
+ifeq ($(user_variant),user)
+$(error Do not enable text relocations on user builds)
+else
+LOCAL_CPPFLAGS += -DTARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS
+endif
+endif
+
 # We need to access Bionic private headers in the linker.
 LOCAL_CFLAGS += -I$(LOCAL_PATH)/../libc/
 
@@ -73,10 +81,6 @@ LOCAL_MODULE := linker
 LOCAL_MODULE_STEM_32 := linker
 LOCAL_MODULE_STEM_64 := linker64
 LOCAL_MULTILIB := both
-
-# Leave the symbols in the shared library so that stack unwinders can produce
-# meaningful name resolution.
-LOCAL_STRIP_MODULE := keep_symbols
 
 # Insert an extra objcopy step to add prefix to symbols. This is needed to prevent gdb
 # looking up symbols in the linker by mistake.
