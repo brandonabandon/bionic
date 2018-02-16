@@ -42,7 +42,8 @@ libc_common_flags = [
     "-Wunused",
     "-Wno-deprecated-declarations",
     "-Wframe-larger-than=2048",
-    "-Wno-null-pointer-arithmetic",	
+    "-Wno-null-pointer-arithmetic",
+    "-Wnull-pointer-arithmetic",
 
     // Try to catch typical 32-bit assumptions that break with 64-bit pointers.
     "-Werror=pointer-to-int-cast",
